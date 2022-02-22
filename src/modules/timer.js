@@ -1,4 +1,5 @@
 const timer = (deadline) => {
+
   const timerDays = document.getElementById('timer-days'),
     timerHours = document.getElementById('timer-hours'),
     timerMinutesours = document.getElementById('timer-minutes'),
@@ -38,7 +39,6 @@ const timer = (deadline) => {
       timerMinutesours.textContent = getTime.minutes;
       timerSeconds.textContent = getTime.seconds;
     } else clearInterval(idIntervalTimer);
-
   }
 
   let idIntervalTimer = setInterval(updateClock, 1000)

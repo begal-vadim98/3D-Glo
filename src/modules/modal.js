@@ -1,28 +1,44 @@
+import helpers from './helpers'
+
+
 const modal = () => {
   const buttons = document.querySelectorAll('.popup-btn'),
     modal = document.querySelector('.popup'),
+    modalContent = document.querySelector('.popup-content'),
     modalClose = modal.querySelector('.popup-close');
 
-  // Анимация модального окна
-  let count = 0;
-  
-  const modalOpenAnimation = () => {
-    count += 4;
-
-    let idModalOpen = requestAnimationFrame(modalOpenAnimation);
-
-    if (count <= 100) modal.style.transform = `translateX(${-100 + count}%)`;
-    else {
-      count = 0;
-      cancelAnimationFrame(idModalOpen);
+  const modalOpenAnimation = (duration) => {
+   helpers.animate({
+    duration: duration,
+    timing: function linear(timeFraction) {
+      return timeFraction;
+    },
+    draw: function(progress) {
+      modal.style.opacity = progress ;
+      modalContent.style.opacity = 0;
     }
+  },  setTimeout(() => {
+        helpers.animate({
+
+          duration: duration,
+          timing: function linear(timeFraction) {
+            return timeFraction;
+          },
+
+          draw: function(progress) {
+            modalContent.style.opacity = progress  ;
+          }
+        })
+  }, duration));
 
   }
+
+ 
 
 // Открытие модального окна
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-      if (screen.availWidth >= 768) modalOpenAnimation();
+      if (screen.availWidth >= 768) modalOpenAnimation(300);
       modal.style.display = 'block';
     })
   })
@@ -30,8 +46,11 @@ const modal = () => {
 // Закрытие модального окна
   modalClose.addEventListener('click', () => {
     modal.style.display = 'none';
-    modal.style.transform = ``;
+    modal.style.opacity = ``;
+    modalContent.style.opacity = ``;
   })
+
+
 }
 
 export default modal

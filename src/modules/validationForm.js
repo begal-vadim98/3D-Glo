@@ -25,7 +25,7 @@ const validation = () => {
   const validationFormEmail = () => {
     const inputTex = [...document.querySelectorAll('form input[type=email]')];
     const testEmail = /([^a-zA-Z1-9\@ \- \_ \. \! \* \' \`])+/gi
-    console.log(inputTex)
+  
     inputTex.forEach(element => {
 
       element.addEventListener('input', () => {

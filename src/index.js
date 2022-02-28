@@ -1,12 +1,13 @@
 import timer from './modules/timer'
-import menu from './modules/menu'
+import toggleMenu from './modules/toggleMenu'
 import modal from './modules/modal'
 import scroll from './modules/scroll'
 import validation from './modules/validationForm'
+import tabs from './modules/tabs'
 
-// helpers();
-timer('26 februar 2022');
-menu();
+timer('29 october 2022');
+toggleMenu();
 modal();
 scroll();
 validation();
+tabs();

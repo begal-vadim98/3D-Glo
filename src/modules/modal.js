@@ -1,6 +1,5 @@
 import helpers from './helpers'
 
-
 const modal = () => {
   const buttons = document.querySelectorAll('.popup-btn'),
     modal = document.querySelector('.popup'),

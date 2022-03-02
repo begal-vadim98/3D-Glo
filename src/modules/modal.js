@@ -6,7 +6,7 @@ const modal = () => {
     modalContent = document.querySelector('.popup-content');
 
   const modalOpenAnimation = (duration) => {
-   helpers.animate({
+   helpers({
     duration: duration,
     timing: function linear(timeFraction) {
       return timeFraction;
@@ -16,7 +16,7 @@ const modal = () => {
       modalContent.style.opacity = 0;
       if(progress === 1) {
 
-      helpers.animate({
+      helpers({
 
       duration: duration,
       timing: function linear(timeFraction) {

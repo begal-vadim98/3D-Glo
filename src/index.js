@@ -5,6 +5,7 @@ import scroll from './modules/scroll'
 import validation from './modules/validationForm'
 import tabs from './modules/tabs'
 import slider from './modules/slider'
+import calc from './modules/calc'
 
 timer('29 october 2022');
 toggleMenu();
@@ -13,3 +14,4 @@ scroll();
 validation();
 tabs();
 slider('.portfolio-content', '.portfolio-item', 'portfolio-item-active', 'dot-active');
+calc(100);

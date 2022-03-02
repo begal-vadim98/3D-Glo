@@ -56,7 +56,7 @@ const timer = (deadline) => {
     }
      
   }
-
+  updateClock();
   let idIntervalTimer = setInterval(updateClock, 1000)
 }
 

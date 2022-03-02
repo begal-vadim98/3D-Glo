@@ -47,7 +47,7 @@ const slider = (sliderBox, slide, slideActive = 'slide-active', dotActive = 'dot
     dots[0].classList.add(dotActive);
   }
 
-  if (!sliderBlock, !slides[0]) return;
+  if (!sliderBlock || !slides[0]) return;
 
   sliderBlock.addEventListener('click', (e) => {
     e.preventDefault();

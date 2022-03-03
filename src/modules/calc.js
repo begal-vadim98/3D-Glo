@@ -44,7 +44,7 @@ const calc = (price) => {
       } else totalValue = 0;
 
       total.textContent = Math.round(totalValue);
-      if(totalValue > 0) animateChangeTotal(totalValue);
+       animateChangeTotal(totalValue);
     }
 
     calcBlock.addEventListener('input', (e) => {

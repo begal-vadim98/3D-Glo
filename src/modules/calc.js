@@ -9,14 +9,14 @@ const calc = (price) => {
     total = document.getElementById('total');
   
 
-    const animateChangeTotal = () => {
+    const animateChangeTotal = (value) => {
       animate({
-        duration: 1000,
+        duration: 500,
         timing(timeFraction) {
           return timeFraction;
         },
         draw(progress) {
-          total.style.opacity = progress;
+          total.textContent = Math.round(value * progress);
         }
       });
     }
@@ -44,7 +44,7 @@ const calc = (price) => {
       } else totalValue = 0;
 
       total.textContent = Math.round(totalValue);
-      if(totalValue > 0) animateChangeTotal();
+      if(totalValue > 0) animateChangeTotal(totalValue);
     }
 
     calcBlock.addEventListener('input', (e) => {

@@ -1,4 +1,4 @@
-import helpers from './helpers'
+import {animate} from './helpers'
 
 const modal = () => {
   const buttons = document.querySelectorAll('.popup-btn'),
@@ -6,7 +6,7 @@ const modal = () => {
     modalContent = document.querySelector('.popup-content');
 
   const modalOpenAnimation = (duration) => {
-   helpers({
+   animate({
     duration: duration,
     timing: function linear(timeFraction) {
       return timeFraction;
@@ -16,7 +16,7 @@ const modal = () => {
       modalContent.style.opacity = 0;
       if(progress === 1) {
 
-      helpers({
+      animate({
 
       duration: duration,
       timing: function linear(timeFraction) {
@@ -27,6 +27,33 @@ const modal = () => {
         modalContent.style.opacity = progress;
       }
       })
+      }
+      }
+      });
+  }
+  const modalCloseAnimation = (duration) => {
+   animate({
+    duration: duration,
+    timing: function linear(timeFraction) {
+      return timeFraction;
+    },
+    draw: function(progress) {
+      modal.style.opacity = 1 - progress ;
+      modalContent.style.opacity = 0;
+      if(progress === 1) {
+      animate({
+
+      duration: duration,
+      timing: function linear(timeFraction) {
+        return timeFraction;
+      },
+
+      draw: function (progress) {
+        modalContent.style.opacity =  1 - progress;
+        modal.style.display = 'none';
+      }
+      })
+      
       }
       }
       });
@@ -46,9 +73,7 @@ const modal = () => {
 
   modal.addEventListener('click', (e) => {
     if(!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
-      modal.style.display = 'none';
-      modal.style.opacity = ``;
-      modalContent.style.opacity = ``;
+      modalCloseAnimation(300);
     }
   })
 }

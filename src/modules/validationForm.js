@@ -11,43 +11,55 @@ const validation = () => {
 
   }
 
-  const validationForm = () => {
-    const inputTex = [...document.querySelectorAll('form input[placeholder="Ваше сообщение"]'), ...document.querySelectorAll('form input[type=text]')];
-
+  const validationFormMessage = () => {
+    const inputTex = document.querySelectorAll('form input[name="user_message"]');
+ 
     inputTex.forEach(element => {
       element.addEventListener('input', () => {
-        element.value = element.value.replace(/([^а-яА-Я\-\ \. \,])+/gi, "")
+        element.value = element.value.replace(/([^а-яА-Я0-9\-\ \. \,])+/gi, "")
       })
     })
+  }
 
+  const validationFormName = () => {
+    const inputTex = document.querySelectorAll('form input[name="user_name"]');
+  
+    inputTex.forEach(element => {
+      element.addEventListener('input', () => {
+        element.value = element.value.replace(/([^а-яА-Я\ \,])+/gi, "")
+      })
+    })
   }
 
   const validationFormEmail = () => {
     const inputTex = [...document.querySelectorAll('form input[type=email]')];
-    const testEmail = /([^a-zA-Z1-9\@ \- \_ \. \! \* \' \`])+/gi
-  
+    
+    const testEmail = /([^a-zA-Z1-9\@ \- \_ \. \! \* \' \`])+/gi;
+
+    let regMail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
     inputTex.forEach(element => {
 
       element.addEventListener('input', () => {
-        console.log(testEmail.test(element.value))
-
         element.value = element.value.replace(testEmail, "")
+
       })
     })
 
   }
+  
   const validationFormTel = () => {
     const input = document.querySelectorAll('form input[type=tel]');
-
+    
     input.forEach(element => {
       element.addEventListener('input', () => {
-        element.value = element.value.replace(/([^0-9\+ \( \) \-])+/gi, "")
+        element.value = element.value.replace(/([^0-9\+ \( \) \-])+/gi, "");
       })
     })
 
   }
 
-  validationForm();
+  validationFormMessage();
+  validationFormName();
   validationFormEmail()
   validationFormTel();
   validationCalc();

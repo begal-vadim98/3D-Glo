@@ -33,9 +33,5 @@ sendForm({
 });
 
 sendForm({
-  formId: 'form3', 
-  someElem: [{
-    type: 'block',
-    id: 'total'
-  }]
+  formId: 'form3'
 });

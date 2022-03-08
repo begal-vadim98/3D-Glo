@@ -1,10 +1,12 @@
 const sendForm = ({ formId, someElem = [] }) => {
   const form = document.getElementById(formId);
 
-  const statusBlock = document.createElement('div'),
-    loadText = 'Загрузка...',
-    errorText = 'Ошибка...',
-    successText = 'Спасибо! Мы с вами свяжемся';
+  const statusBlock = document.createElement('div');
+  const doubleBounce1 = document.createElement('div');
+  const doubleBounce2 = document.createElement('div');
+
+    const errorText = 'Ошибка...';
+    const successText = 'Спасибо! Мы с вами свяжемся';
   
   const validate = (list) => {
 
@@ -35,8 +37,15 @@ const sendForm = ({ formId, someElem = [] }) => {
     const formData = new FormData(form);
     const formBody = {};
     
-    statusBlock.textContent = loadText;
+    statusBlock.textContent = "";
+    statusBlock.classList.add('sk-double-bounce');
+
+    doubleBounce1.classList.add('sk-child', 'sk-double-bounce-1');
+    doubleBounce2.classList.add('sk-child', 'sk-double-bounce-2');
+
     form.append(statusBlock);
+    statusBlock.append(doubleBounce1, doubleBounce2);
+
     formData.forEach((val, key) => {
       formBody[key] = val;
     })
@@ -55,6 +64,11 @@ const sendForm = ({ formId, someElem = [] }) => {
       console.log(validate(formElements));
       sendData(formBody)
         .then(data => {
+          statusBlock.classList.remove('sk-double-bounce');
+
+          doubleBounce1.classList.remove('sk-child', 'sk-double-bounce-1');
+          doubleBounce2.classList.remove('sk-child', 'sk-double-bounce-2');
+
           statusBlock.textContent = successText;
           formElements.forEach(input => input.value = "");
         })

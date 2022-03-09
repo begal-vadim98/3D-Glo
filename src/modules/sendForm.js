@@ -20,24 +20,31 @@ const sendForm = ({
       regName = /^[а-яА-Я\ /]{2,16}$/;
 
     list.forEach(input => {
+
       if ((input.name === 'user_email') && regMail.test(input.value) !== true) {
-        input.style.backgroundColor = "rgb(182, 27, 39)";
-        success = false;
+
+        input.classList.add('error');
+
       } else if ((input.name === 'user_phone') && regPhone.test(input.value) !== true) {
-        input.style.backgroundColor = "rgb(182, 27, 39)";
-        success = false;
+
+        input.classList.add('error');
+
       } else if (input.name === 'user_name' && regName.test(input.value) !== true) {
-        input.style.backgroundColor = "rgb(182, 27, 39)";
-        success = false;
+
+        input.classList.add('error');
+
       } else if (input.value === "") {
-        input.style.backgroundColor = "rgb(182, 27, 39)";
-        success = false;
-      } else input.style.backgroundColor = "rgb(17, 194, 17, 0.973)";
+
+        input.classList.add('error');
+
+      } else input.classList.add('success');
+
+      if(!input.classList.contains('success')) success = false;
     })
 
     return success;
   }
-
+  
   const sendData = (data) => {
     return fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
@@ -85,7 +92,7 @@ const sendForm = ({
           statusBlock.classList.remove('sk-double-bounce');
           doubleBounce1.classList.remove('sk-child', 'sk-double-bounce-1');
           doubleBounce2.classList.remove('sk-child', 'sk-double-bounce-2');
-          statusBlock.style.color = 'white';
+          // statusBlock.style.color = 'white';
           statusBlock.textContent = successText;
 
           setTimeout(() => form.removeChild(statusBlock), 1500);

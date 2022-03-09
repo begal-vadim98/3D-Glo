@@ -1,5 +1,7 @@
 const validation = () => {
 
+  
+
   const validationCalc = () => {
 
     const input = document.querySelectorAll('.calc-block input');
@@ -17,7 +19,8 @@ const validation = () => {
     inputTex.forEach(element => {
       element.addEventListener('input', () => {
         element.value = element.value.replace(/([^а-яА-Я0-9\-\ \. \,])+/gi, "")
-        element.style.backgroundColor = "white";
+        element.classList.remove('error');
+        element.classList.remove('success');
       })
     })
   }
@@ -28,7 +31,10 @@ const validation = () => {
     inputTex.forEach(element => {
       element.addEventListener('input', () => {
         element.value = element.value.replace(/([^а-яА-Я\ \,])+/gi, "");
-        element.style.backgroundColor = "white";
+        element.classList.remove('error');
+        element.classList.remove('success');
+        
+
       })
     })
   }
@@ -43,8 +49,8 @@ const validation = () => {
 
       element.addEventListener('input', () => {
         element.value = element.value.replace(testEmail, "");
-        element.style.backgroundColor = "white";
-
+        element.classList.remove('error');
+        element.classList.remove('success');
       })
     })
 
@@ -55,7 +61,8 @@ const validation = () => {
   
     inputTex.forEach(element => {
       element.addEventListener('input', () => {
-        element.style.backgroundColor = "white";
+        element.classList.remove('error');
+        element.classList.remove('success');
       })
     })
     

@@ -1,13 +1,29 @@
-const validation = () => {
+import validate from './validate'
 
+const validation = (formMessege, formName, formEmail, formTell, invalidClass = 'invalid', validClass = 'valid' ) => {
 
-  let regMail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i,
-      regPhone = /\d[\d\(\)\ -]{16,18}\d$/,
-      regName = /^[а-яА-Я\ /]{2,16}$/;
+  const  regPhone = /[^0-9]/,
+    regEmail = /[^a-zA-Z\d@-_.!*'`]/gi,
+    regMessege = /([^а-яА-Я0-9\-\ \. \,])+/gi,
+    regName = /([^а-яА-Я.])+/gi;
 
-const toggleClass = (elem, removaClass, addClass) => {
-  elem.classList.remove(removaClass);
-  elem.classList.add(addClass);
+const forInputValid = (reg, elem) => {
+  const inputTex = document.querySelectorAll(`form input[name=${elem}]`);
+
+  inputTex.forEach(element => {
+
+    element.addEventListener('input', () => {
+      element.value = element.value.replace(reg, "");
+      if (element.classList.contains(invalidClass) || element.classList.contains(validClass))
+        validate([element]);
+    })
+
+    element.addEventListener('invalid', event => {
+      event.preventDefault();
+      validate([event.target]);
+    });
+  })
+
 }
 
   const validationCalc = () => {
@@ -21,57 +37,12 @@ const toggleClass = (elem, removaClass, addClass) => {
 
   }
 
-  const validationFormMessage = () => {
-    const inputTex = document.querySelectorAll('form input[name="user_message"]');
+    
+    
  
-    inputTex.forEach(element => {
-      element.addEventListener('input', () => {
-        element.value = element.value.replace(/([^а-яА-Я0-9\-\ \. \,])+/gi, "")
-        element.classList.remove('error');
-        element.classList.remove('success');
-      })
-    })
-  }
 
-  const validationFormName = () => {
-    const inputTex = document.querySelectorAll('form input[name="user_name"]');
-    
-    
-    inputTex.forEach(element => {
-      element.addEventListener('input', () => {
-        element.value = element.value.replace(/([^а-яА-Я.])+/gi, "");
-        if (regName.test(element.value) === true && element.classList.contains('error')) toggleClass(element,'error', 'success')
-        if (regName.test(element.value) !== true && element.classList.contains('success')) element.addEventListener('invalid', toggleClass(element,'success', 'error'));
-
-      })
-
-    })
-  }
-
-  const validationFormEmail = () => {
-    const inputTex = [...document.querySelectorAll('form input[type=email]')];
-
-    inputTex.forEach(element => {
-
-      element.addEventListener('input', () => {
-        element.value = element.value.replace(/[^A-Z0-9@.-_]/gi, "");
-        if (regMail.test(element.value) === true && element.classList.contains('error')) toggleClass(element,'error', 'success')
-        if (regMail.test(element.value) !== true && element.classList.contains('success')) element.addEventListener('invalid', toggleClass(element,'success', 'error'));
-      
-      })
-    })
-
-  }
-  
   const validationFormTel = () => {
-    const inputTex = document.querySelectorAll('form input[name="user_phone"]');
-  
-    inputTex.forEach(element => {
-      element.addEventListener('input', () => {
-       if (regPhone.test(element.value) === true && element.classList.contains('error')) toggleClass(element,'error', 'success')
-        if (regPhone.test(element.value) !== true && element.classList.contains('success')) element.addEventListener('invalid', toggleClass(element,'success', 'error'));
-      })
-    })
+
     
     function maskPhone(selector, masked = '+7 (__) --') { const elems = document.querySelectorAll(selector);
 
@@ -108,16 +79,23 @@ const toggleClass = (elem, removaClass, addClass) => {
         elem.addEventListener("blur", mask);
       }
       }
-    maskPhone('form input[type=tel]', '+7 (___)-___-__-__');
+    maskPhone('form input[type=tel]', '+7__________');
      
   }
   
 
-  validationFormMessage();
-  validationFormName();
-  validationFormEmail()
-  validationFormTel();
-  validationCalc();
+ 
+  try {
+    forInputValid(regMessege, formMessege);
+    forInputValid(regName, formName);
+    forInputValid(regEmail, formEmail);
+    forInputValid(regPhone, formTell);
+    validationFormTel();
+    validationCalc();
+
+  } catch (error) {
+    console.log(error.message)
+  }
 
 }
 

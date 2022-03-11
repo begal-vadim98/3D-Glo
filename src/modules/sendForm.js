@@ -1,3 +1,5 @@
+import validate from './validate'
+
 const sendForm = ({
   formId,
   someElem = []
@@ -11,40 +13,7 @@ const sendForm = ({
   const errorText = 'Ошибка...';
   const successText = 'Спасибо! Мы с вами свяжемся';
 
-  const validate = (list) => {
 
-    let success = true;
-
-    let regMail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i,
-      regPhone = /\d[\d\(\)\ -]{12,12}\d$/,
-      regName = /^[а-яА-Я\ /]{2,16}$/;
-
-    list.forEach(input => {
-
-      if ((input.name === 'user_email') && regMail.test(input.value) !== true) {
-
-        input.classList.add('error');
-
-      } else if ((input.name === 'user_phone') && regPhone.test(input.value) !== true) {
-
-        input.classList.add('error');
-
-      } else if (input.name === 'user_name' && regName.test(input.value) !== true) {
-
-        input.classList.add('error');
-
-      } else if (input.value === "") {
-
-        input.classList.add('error');
-
-      } else input.classList.add('success');
-
-      if(!input.classList.contains('success')) success = false;
-    })
-
-    return success;
-  }
-  
   const sendData = (data) => {
     return fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
@@ -92,7 +61,7 @@ const sendForm = ({
           statusBlock.classList.remove('sk-double-bounce');
           doubleBounce1.classList.remove('sk-child', 'sk-double-bounce-1');
           doubleBounce2.classList.remove('sk-child', 'sk-double-bounce-2');
-          // statusBlock.style.color = 'white';
+          statusBlock.style.color = 'white';
           statusBlock.textContent = successText;
 
           setTimeout(() => form.removeChild(statusBlock), 1500);

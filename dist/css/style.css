@@ -34,9 +34,9 @@
 
 
 .error {
-  background-color: rgb(182, 27, 39);
+  background-color: #ff7f50fd;
 }
 
 .success {
-  background-color: rgb(67, 197, 28);
+  background-color: rgb(124, 248, 86);
 }

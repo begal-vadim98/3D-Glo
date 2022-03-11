@@ -12,7 +12,7 @@ timer('29 april 2022');
 toggleMenu();
 modal();
 scroll();
-validation();
+validation('user_message', 'user_name', 'user_email', 'user_phone',  'error', 'success');
 tabs();
 slider('.portfolio-content', '.portfolio-item', 'portfolio-item-active', 'dot-active');
 calc(100);

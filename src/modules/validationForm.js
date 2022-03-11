@@ -2,7 +2,7 @@ const validation = () => {
 
 
   let regMail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i,
-      regPhone = /\d[\d\(\)\ -]{18,18}\d$/,
+      regPhone = /\d[\d\(\)\ -]{16,18}\d$/,
       regName = /^[а-яА-Я\ /]{2,16}$/;
 
 const toggleClass = (elem, removaClass, addClass) => {

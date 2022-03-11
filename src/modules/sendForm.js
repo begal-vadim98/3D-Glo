@@ -100,13 +100,14 @@ const sendForm = ({
           formElements.forEach(input => {
 
             input.value = "";
-            input.style.backgroundColor = "white";
+            input.classList.remove('error');
+            input.classList.remove('success');
 
           });
         })
         .catch(error => statusBlock.textContent = errorText);
 
-    } else validate(formElements);
+    }
 
   }
 

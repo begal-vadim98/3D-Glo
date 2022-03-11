@@ -1,6 +1,14 @@
 const validation = () => {
 
-  
+
+  let regMail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i,
+      regPhone = /\d[\d\(\)\ -]{18,18}\d$/,
+      regName = /^[а-яА-Я\ /]{2,16}$/;
+
+const toggleClass = (elem, removaClass, addClass) => {
+  elem.classList.remove(removaClass);
+  elem.classList.add(addClass);
+}
 
   const validationCalc = () => {
 
@@ -27,30 +35,28 @@ const validation = () => {
 
   const validationFormName = () => {
     const inputTex = document.querySelectorAll('form input[name="user_name"]');
-  
+    
+    
     inputTex.forEach(element => {
       element.addEventListener('input', () => {
-        element.value = element.value.replace(/([^а-яА-Я\ \,])+/gi, "");
-        element.classList.remove('error');
-        element.classList.remove('success');
-        
+        if (regName.test(element.value) === true && element.classList.contains('error')) toggleClass(element,'error', 'success')
+        if (regName.test(element.value) !== true && element.classList.contains('success')) element.addEventListener('invalid', toggleClass(element,'success', 'error'));
 
       })
+
     })
   }
 
   const validationFormEmail = () => {
     const inputTex = [...document.querySelectorAll('form input[type=email]')];
-    
-    const testEmail = /([^a-zA-Z1-9\@ \- \_ \. \! \* \' \`])+/gi;
 
-    let regMail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
     inputTex.forEach(element => {
 
       element.addEventListener('input', () => {
-        element.value = element.value.replace(testEmail, "");
-        element.classList.remove('error');
-        element.classList.remove('success');
+
+        if (regMail.test(element.value) === true && element.classList.contains('error')) toggleClass(element,'error', 'success')
+        if (regMail.test(element.value) !== true && element.classList.contains('success')) element.addEventListener('invalid', toggleClass(element,'success', 'error'));
+        
       })
     })
 
@@ -61,8 +67,8 @@ const validation = () => {
   
     inputTex.forEach(element => {
       element.addEventListener('input', () => {
-        element.classList.remove('error');
-        element.classList.remove('success');
+       if (regPhone.test(element.value) === true && element.classList.contains('error')) toggleClass(element,'error', 'success')
+        if (regPhone.test(element.value) !== true && element.classList.contains('success')) element.addEventListener('invalid', toggleClass(element,'success', 'error'));
       })
     })
     
@@ -104,12 +110,14 @@ const validation = () => {
     maskPhone('form input[type=tel]', '+7 (___)-___-__-__');
      
   }
+  
 
   validationFormMessage();
   validationFormName();
   validationFormEmail()
   validationFormTel();
   validationCalc();
+
 }
 
 export default validation

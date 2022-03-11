@@ -39,6 +39,7 @@ const toggleClass = (elem, removaClass, addClass) => {
     
     inputTex.forEach(element => {
       element.addEventListener('input', () => {
+        element.value = element.value.replace(/([^а-яА-Я.])+/gi, "");
         if (regName.test(element.value) === true && element.classList.contains('error')) toggleClass(element,'error', 'success')
         if (regName.test(element.value) !== true && element.classList.contains('success')) element.addEventListener('invalid', toggleClass(element,'success', 'error'));
 
@@ -53,10 +54,10 @@ const toggleClass = (elem, removaClass, addClass) => {
     inputTex.forEach(element => {
 
       element.addEventListener('input', () => {
-
+        element.value = element.value.replace(/[^A-Z0-9@]/gi, "");
         if (regMail.test(element.value) === true && element.classList.contains('error')) toggleClass(element,'error', 'success')
         if (regMail.test(element.value) !== true && element.classList.contains('success')) element.addEventListener('invalid', toggleClass(element,'success', 'error'));
-        
+      
       })
     })
 

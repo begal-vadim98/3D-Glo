@@ -5,7 +5,7 @@ const validate = (list) => {
   let regMail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i,
     regPhone = /\d[\d\(\)\ -]{9,11}\d$/,
     regName = /^[а-яА-Я\ /]{2,16}$/,
-    regMessage = /^[а-яА-Я\ /]{5,}$/;
+    regMessage = /[а-яА-Я]{3,}/gi;
 
   list.forEach(input => {
     input.classList.remove('error');

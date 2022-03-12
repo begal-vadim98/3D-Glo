@@ -4,8 +4,8 @@ const validation = (formMessege, formName, formEmail, formTell, invalidClass = '
 
   const  regPhone = /[^0-9]/,
     regEmail = /[^a-zA-Z\d@-_.!*'`]/gi,
-    regMessege = /([^а-яА-Я0-9\-\ \. \,])+/gi,
-    regName = /([^а-яА-Я.])+/gi;
+    regMessege = /([^а-яА-Я0-9?!-., ])+/gi,
+    regName = /([^а-яА-Я. ])+/gi;
 
 const forInputValid = (reg, elem) => {
   const inputTex = document.querySelectorAll(`form input[name=${elem}]`);
@@ -16,6 +16,10 @@ const forInputValid = (reg, elem) => {
       element.value = element.value.replace(reg, "");
       if (element.classList.contains(invalidClass) || element.classList.contains(validClass))
         validate([element]);
+    })
+
+    element.addEventListener('blur', () => {
+      if(element.name === 'user_name' && element.value) element.value = element.value[0].toUpperCase() + (element.value).slice(1);
     })
 
     element.addEventListener('invalid', event => {

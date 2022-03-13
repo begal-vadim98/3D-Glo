@@ -10,7 +10,7 @@ import sendForm from './modules/sendForm'
 
 timer('31 april 2022');
 toggleMenu();
-modal();
+modal('.popup-btn', '.popup', '.popup-content');
 scroll();
 validation('user_message', 'user_name', 'user_email', 'user_phone',  'error', 'success');
 tabs();

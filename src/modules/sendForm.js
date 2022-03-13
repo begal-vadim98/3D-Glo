@@ -1,4 +1,5 @@
 import validate from './validate'
+import modalAnimate from './modalAnimate'
 
 const sendForm = ({
   formId,
@@ -65,6 +66,8 @@ const sendForm = ({
           statusBlock.textContent = successText;
 
           setTimeout(() => form.removeChild(statusBlock), 1500);
+
+          setTimeout(() => modalAnimate(300, 1, '.popup', '.popup-content'), 1000);
 
           formElements.forEach(input => {
 

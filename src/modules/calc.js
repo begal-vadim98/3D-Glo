@@ -16,7 +16,7 @@ const calc = (price) => {
           return timeFraction;
         },
         draw(progress) {
-          total.textContent = Math.round(value * progress);
+            total.textContent =  Math.round(value * progress) ;
         }
       });
     }
@@ -25,7 +25,7 @@ const calc = (price) => {
       const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
       const calcSquareValue = +calcSquare.value;
 
-      let totalValue = 0;
+      let totalValue = +total.textContent;
       let calcCountValue = 1;
       let calcDayValue = 1;
 
@@ -40,11 +40,16 @@ const calc = (price) => {
       }
 
       if(calcType.value && calcSquare.value) {
-        totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
+        totalValue =  price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
+
+        animateChangeTotal(totalValue);
+        ;
+        
+
       } else totalValue = 0;
 
-      total.textContent = Math.round(totalValue);
-       animateChangeTotal(totalValue);
+       
+
     }
 
     calcBlock.addEventListener('input', (e) => {

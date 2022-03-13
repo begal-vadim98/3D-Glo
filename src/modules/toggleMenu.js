@@ -5,10 +5,18 @@ const toggleMenu = () => {
     menu.classList.toggle('active-menu');
   }
 
-  document.addEventListener('click', ({ target }) =>
-    (target.closest('.menu') || target.matches('.close-btn, menu a') || 
-    (menu.classList.contains('active-menu') && !target.closest('menu'))) &&
-    handleMenu());
+ 
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    
+    if(target.closest('.menu') || target.matches('.close-btn, menu a') || 
+    (menu.classList.contains('active-menu') && !target.closest('menu'))) {
+      e.preventDefault();
+      handleMenu();
+    } 
+
+  });
+
 }
 
 export default toggleMenu

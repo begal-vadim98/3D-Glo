@@ -40,15 +40,10 @@ const calc = (price) => {
       }
 
       if(calcType.value && calcSquare.value) {
-        totalValue =  price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
-
-        animateChangeTotal(totalValue);
-        ;
-        
-
+        totalValue +=  (price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue - totalValue);
       } else totalValue = 0;
 
-       
+      animateChangeTotal(totalValue);
 
     }
 
